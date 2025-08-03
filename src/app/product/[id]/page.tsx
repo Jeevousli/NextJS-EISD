@@ -1,16 +1,11 @@
-// app/product/[id]/page.tsx
-
 import Image from 'next/image';
 import Link from 'next/link';
 import { Metadata } from 'next';
 
 type Props = {
-  params: {
-    id: string;
-  };
+  params: Record<string, string>;
 };
 
-// Optional (SEO)
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const res = await fetch(`https://fakestoreapi.com/products/${params.id}`);
   const product = await res.json();
@@ -43,7 +38,6 @@ export default async function ProductDetail({ params }: Props) {
   );
 }
 
-// Tambahkan ini untuk mendukung SSG
 export async function generateStaticParams() {
   const res = await fetch('https://fakestoreapi.com/products');
   const products = await res.json();
